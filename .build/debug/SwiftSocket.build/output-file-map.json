@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/master.swiftdeps"
+  },
+  "/Users/Jacopo/SwiftSocketListener/Sources/main.swift": {
+    "dependencies": "/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main.d",
+    "object": "/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main.swift.o",
+    "swiftmodule": "/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main.swiftdeps"
+  }
+}

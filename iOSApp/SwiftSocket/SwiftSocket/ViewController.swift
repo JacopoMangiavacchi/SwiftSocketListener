@@ -14,21 +14,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var outputTextView: UITextView!
     
     var server: EchoServer?
-    var connetionString: String { return "Active Connectio: \(server?.connectedSockets.count)" }
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        outputTextView.text = ""
+        
         let port = 1337
         server = EchoServer(port: port)
         
-        connectionLabel.text = connetionString
-        //TODO: Get iOS IP address
-        outputTextView.text = "Swift Echo Server Sample\nConnect to 127.0.0.1 \(port)\n"
+        connectionLabel.text = "Active Connection: \(server!.connectedSockets.count)"
         
+        server?.onStarted = {
+            self.outputTextView.text.append("Swift Echo Server Sample\nConnect to \(self.server!.hostname!) \(port)\n")
+        }
+
         server?.onConnection = {
             self.outputTextView.text.append("-new connection\n")
         }

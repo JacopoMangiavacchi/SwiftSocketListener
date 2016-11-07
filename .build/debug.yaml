@@ -1,0 +1,47 @@
+client:
+  name: swift-build
+tools: {}
+targets:
+  "test": ["<Socket.module>","<SwiftSocket.module>","<SwiftSocket.exe>"]
+  "main": ["<Socket.module>","<SwiftSocket.module>","<SwiftSocket.exe>"]
+default: "main"
+commands: 
+  "<Socket.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "Socket"
+    module-output-path: "/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.swiftmodule"
+    inputs: []
+    outputs: ["<Socket.module>","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/Socket.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketProtocols.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketUtils.swift.o"]
+    import-paths: ["/Users/Jacopo/SwiftSocketListener/.build/debug"]
+    temps-path: "/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build"
+    objects: ["/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/Socket.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketProtocols.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketUtils.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/Jacopo/SwiftSocketListener/.build/debug/ModuleCache"]
+    sources: ["/Users/Jacopo/SwiftSocketListener/Packages/Socket-0.10.15/Sources/Socket.swift","/Users/Jacopo/SwiftSocketListener/Packages/Socket-0.10.15/Sources/SocketProtocols.swift","/Users/Jacopo/SwiftSocketListener/Packages/Socket-0.10.15/Sources/SocketUtils.swift"]
+    is-library: true
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<SwiftSocket.module>":
+    tool: swift-compiler
+    executable: "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    module-name: "SwiftSocket"
+    module-output-path: "/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.swiftmodule"
+    inputs: ["<Socket.module>"]
+    outputs: ["<SwiftSocket.module>","/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main.swift.o"]
+    import-paths: ["/Users/Jacopo/SwiftSocketListener/.build/debug"]
+    temps-path: "/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build"
+    objects: ["/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main.swift.o"]
+    other-args: ["-j8","-D","SWIFT_PACKAGE","-Onone","-g","-enable-testing","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-module-cache-path","/Users/Jacopo/SwiftSocketListener/.build/debug/ModuleCache"]
+    sources: ["/Users/Jacopo/SwiftSocketListener/Sources/main.swift"]
+    is-library: false
+    enable-whole-module-optimization: false
+    num-threads: "8"
+
+  "<SwiftSocket.exe>":
+    tool: shell
+    description: "Linking ./.build/debug/SwiftSocket"
+    inputs: ["/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/Socket.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketProtocols.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketUtils.swift.o"]
+    outputs: ["<SwiftSocket.exe>","/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket"]
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-target","x86_64-apple-macosx10.10","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk","-g","-L/Users/Jacopo/SwiftSocketListener/.build/debug","-o","/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-emit-executable","/Users/Jacopo/SwiftSocketListener/.build/debug/SwiftSocket.build/main.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/Socket.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketProtocols.swift.o","/Users/Jacopo/SwiftSocketListener/.build/debug/Socket.build/SocketUtils.swift.o"]
+

@@ -1,0 +1,5 @@
+version: "Apple Swift version 3.0.1 (swiftlang-800.0.58.6 clang-800.0.42.1)"
+options: "0e10b68cf1b49200ccd2a8f8e7d104e6"
+build_time: [531825767, 979677000]
+inputs:
+  "/Users/Jacopo/SwiftSocketListener/Sources/main.swift": [531825584, 0]

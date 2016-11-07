@@ -13,11 +13,15 @@ class EchoServer {
     static let bufferSize = 4096
     
     let port: Int
+    fileprivate var internalHostname: String?
+    var hostname: String? { get {return internalHostname} }
+    
     var listenSocket: Socket? = nil
     var continueRunning = true
     var connectedSockets = [Int32: Socket]()
     let socketLockQueue = DispatchQueue(label: "com.ibm.serverSwift.socketLockQueue")
     
+    var onStarted:(()->())?
     var onConnection:(()->())?
     var onDisconnection:(()->())?
     var onMessage:((_ message: String)->())?
@@ -33,6 +37,7 @@ class EchoServer {
         }
         self.listenSocket?.close()
     }
+    
     
     func run() {
         
@@ -51,8 +56,13 @@ class EchoServer {
                 }
                 
                 try socket.listen(on: self.port)
-                
-                print("Listening on port: \(socket.listeningPort)")
+
+                self.internalHostname = socket.signature?.hostname
+                print("Listening on \(self.hostname) : \(socket.listeningPort)")
+
+                DispatchQueue.main.sync {
+                    self.onStarted?()
+                }
                 
                 repeat {
                     let newSocket = try socket.acceptClientConnection()
